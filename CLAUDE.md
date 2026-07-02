@@ -66,7 +66,7 @@ Cuza 114 fil 28 (8.90→9.02), 115 fil EN 28 (9.05→9.17), 117 fil ES 28
 Titulescu 127 fil 28 (**8.40**→8.77 — 2024 closed exactly at the candidate's
 media), 128 SS 28 (8.25→8.75). Total uman in block: 308 seats. No plain
 (non-bilingual) filologie at Buzești or Carol I; no științe sociale at Cuza.
-Full per-code data for both profiles lives in `SCHOOLS` in `public/app.js`.
+Full per-code data for both profiles lives in `SCHOOLS` in `docs/app.js`.
 
 Counted separately (outside computerized repartition), official 2026 numbers
 from brochure p. 16/18 with last-admitted medias 2024→2025: Military College
@@ -126,11 +126,15 @@ Hierarchy pages: `https://evaluare.edu.ro/Evaluare/CandFromJudIAD.aspx?Jud=18&Po
   module (exports `scrapeHierarchy`, `classifySchool`, `vocationalTrack`,
   CSV read/write helpers) consumed by the web dashboard.
 - `server.js` — zero-dependency dashboard server, `node server.js` (or
-  `npm start`) → http://localhost:7788. Serves `public/` plus
+  `npm start`) → http://localhost:7788. Serves `docs/` plus
   `GET /api/data` (rows + updatedAt) and `GET /api/refresh?pages=N`
   (SSE stream: re-scrapes, events progress/done/error, rewrites the CSV).
   WARNING: a refresh with small `pages` overwrites the CSV with fewer rows.
-- `public/` — the dashboard UI (index.html / styles.css / app.js), all text in
+- Online: https://rocky-org.github.io/theo-admit/ (GitHub Pages, repo
+  rocky-org/theo-admit, branch main, folder /docs). The online page runs in
+  static mode: loads `docs/data.json`, hides the refresh button. Publishing
+  fresh data = local refresh (rewrites data.json) + commit + push.
+- `docs/` — the dashboard UI (index.html / styles.css / app.js), all text in
   Romanian, vanilla JS + hand-built SVG. All modeling happens client-side in
   `app.js`: assumption sliders (real/uman preference share, military,
   pedagogic, arts, sports, theology exits, geographic-leak confidence),
@@ -179,7 +183,7 @@ order = strict preference; chances from the July 2 model at default sliders)
 
 The sheet is also rendered live in the dashboard ("Fișa de opțiuni
 recomandată" section) with per-code chances that follow the sliders — edit
-`SHEET_TIERS` / `SAFETY_SCHOOLS` in `public/app.js` to change it.
+`SHEET_TIERS` / `SAFETY_SCHOOLS` in `docs/app.js` to change it.
 
 Tier A — Elena Cuza (declared priority; all free lottery tickets):
 1. 114 EC filologie (9.02/8.90) ~1%
@@ -241,7 +245,7 @@ Never list a school she would refuse to attend: the assignment is binding
       origin-school stats (done July 2; `node server.js` → localhost:7788).
 - [ ] Re-run after July 9 (final hierarchy): the dashboard refresh button, or
       `node scrape-dolj-hierarchy.js 70 DJ9445089`.
-- [x] Correct seats/cutoffs in `public/app.js` from the ISJ brochure (done
+- [x] Correct seats/cutoffs in `docs/app.js` from the ISJ brochure (done
       July 2 from `brosura-2026-2027.pdf` p. 12; no `est` flags remain).
 - [ ] Recalibrate `LEAK_RATES` from real locality counts.
 - [ ] Confirm per-language pass grades (min 6.00) from the May test lists.

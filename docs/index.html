@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admitere Dolj 2026 — simulare repartizare</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body class="viz-root">
+<main>
+
+  <header class="masthead">
+    <div class="eyebrow">Repartizare computerizată · Dolj · Evaluarea Națională 2026</div>
+    <div class="masthead-row">
+      <div>
+        <h1>Simulare admitere la liceu</h1>
+        <p class="candidate-line">
+          <label>Cod candidat <input id="code-input" value="DJ9445089" spellcheck="false"></label>
+          <span id="candidate-summary" class="muted">se încarcă datele…</span>
+        </p>
+      </div>
+      <div class="hero-chance" id="hero-chance" hidden>
+        <div class="label">Șansa Elena Cuza (orice cod)</div>
+        <div class="value"><span id="hero-pct">–</span><span class="unit">%</span></div>
+        <div class="sub" id="hero-sub"></div>
+      </div>
+      <div class="refresh-box">
+        <button id="refresh-btn" type="button">Actualizează datele</button>
+        <div id="refresh-status">…</div>
+        <div class="progress" id="refresh-progress" hidden><div class="progress-fill" id="refresh-fill"></div></div>
+      </div>
+    </div>
+    <div class="kpi-row" id="kpi-row"></div>
+  </header>
+
+  <div id="app">
+
+    <section class="panel" id="assumptions">
+      <h2>Ipoteze de calcul</h2>
+      <p class="panel-note">Trage de cursoare și toate cifrele de mai jos se recalculează. Valorile sunt estimări — nu se văd în datele oficiale.</p>
+      <div class="sliders" id="sliders"></div>
+      <div id="leak-breakdown"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Curba ierarhiei și pragurile liceelor</h2>
+      <p class="panel-note">Fiecare punct al curbei este un candidat (poziție → medie). Liniile orizontale sunt ultimele medii de admitere din 2025; banda roșie arată poziția efectivă estimată după scurgeri.</p>
+      <div id="hero-chart"></div>
+      <p class="chart-hint">Plimbă cursorul peste grafic pentru detalii la fiecare poziție.</p>
+      <details>
+        <summary>Praguri-cheie ca tabel</summary>
+        <div class="details-body" id="threshold-table"></div>
+      </details>
+    </section>
+
+    <section class="panel">
+      <h2>Șanse pe fiecare cod</h2>
+      <p class="panel-note">Probabilitățile combină istoricul ultimelor medii cu fluxul de locuri sub ipotezele de mai sus. Locurile și ultimele medii (2024/2025) sunt preluate din broșura oficială ISJ 2026–2027, pagina 12.</p>
+      <div id="chances"></div>
+    </section>
+
+    <section class="panel" id="sheet-panel">
+      <h2>Fișa de opțiuni recomandată</h2>
+      <p class="panel-note">Ordinea = preferință strict descrescătoare; algoritmul dă primul cod cu locuri libere, deci visurile puse primele nu costă nimic. Rândurile punctate sunt decizii de familie (compromisuri de profil) — dacă le scoateți, numerotarea se decalează. Procentele se recalculează după ipotezele de mai sus.</p>
+      <div id="sheet"></div>
+    </section>
+
+    <div class="two-col">
+      <section class="panel">
+        <h2>Trasee vocaționale deasupra ei</h2>
+        <p class="panel-note">Candidați clasați peste poziția ei, proveniți din școli cu profil vocațional — cel mai probabil ies din repartizarea computerizată.</p>
+        <div id="vocational"></div>
+      </section>
+      <section class="panel">
+        <h2>Cât de mulți sunt din afara Craiovei</h2>
+        <p class="panel-note">Ponderea candidaților non-Craiova pe benzi de 200 de poziții.</p>
+        <div id="bands"></div>
+      </section>
+    </div>
+
+    <section class="panel">
+      <h2>Școli de proveniență</h2>
+      <p class="panel-note" id="origin-note">Statistică pe școala de gimnaziu, pentru pozițiile scanate.</p>
+      <div class="table-tools">
+        <input id="origin-search" type="search" placeholder="Caută școala (ex: Bălcescu, Traian, Calafat)">
+      </div>
+      <div class="table-wrap">
+        <table id="origin-table">
+          <thead><tr id="origin-head"></tr></thead>
+          <tbody id="origin-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <footer>
+      <details>
+        <summary>Cum se calculează șansele</summary>
+        <div class="details-body" id="methodology"></div>
+      </details>
+    </footer>
+
+  </div>
+
+  <div class="empty-state" id="empty-state" hidden>
+    <p>Nu există încă date descărcate.</p>
+    <p>Apasă „Actualizează datele” pentru a descărca ierarhia de pe evaluare.edu.ro (durează 1–2 minute).</p>
+  </div>
+
+</main>
+<div id="tooltip" role="status"></div>
+<script src="app.js"></script>
+</body>
+</html>

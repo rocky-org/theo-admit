@@ -1,0 +1,10 @@
+{
+  "name": "theo-admitere-dolj",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "start": "node server.js",
+    "scrape": "node scrape-dolj-hierarchy.js 70 DJ9445089"
+  }
+}

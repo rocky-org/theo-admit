@@ -5,6 +5,6 @@
   "engines": { "node": ">=18" },
   "scripts": {
     "start": "node server.js",
-    "scrape": "node scrape-dolj-hierarchy.js 70 DJ9445089"
+    "scrape": "node scrape-dolj-hierarchy.js 75 DJ9445089"
   }
 }

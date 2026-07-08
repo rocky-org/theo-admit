@@ -12,7 +12,7 @@
  * CLI usage:
  *   node scrape-dolj-hierarchy.js [maxPage] [targetPositionOrCode]
  * Defaults:
- *   maxPage = 70  (positions 1..1400), target = 1182
+ *   maxPage = 75  (positions 1..1500), target = 1182
  * The second argument may be a candidate code (e.g. DJ9445089); the target
  * position is then resolved from the scraped data after fetching.
  *
@@ -168,7 +168,7 @@ async function fetchPage(pageNumber, cookie) {
  * onProgress (optional) is called after each page with
  * { page, maxPage, rowsTotal }.
  */
-export async function scrapeHierarchy({ maxPage = 70, onProgress = null } = {}) {
+export async function scrapeHierarchy({ maxPage = 75, onProgress = null } = {}) {
   const all = new Map(); // position -> row
 
   // Warm-up request to obtain the ASP.NET session cookie (without it the
@@ -325,7 +325,7 @@ function printSummary(rows, targetPosition) {
 }
 
 async function cli() {
-  const maxPage = parseInt(process.argv[2] || '70', 10);
+  const maxPage = parseInt(process.argv[2] || '75', 10);
   const targetArg = process.argv[3] || '1182';
   const targetCode = /^[A-Z]{2}\d+$/i.test(targetArg) ? targetArg.toUpperCase() : null;
 

@@ -26,7 +26,7 @@ import {
 const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 7788;
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
 const PUBLIC_DIR = path.join(ROOT, 'docs'); // also the GitHub Pages source
-const DEFAULT_MAX_PAGE = 70;
+const DEFAULT_MAX_PAGE = 75;
 
 const MIME = {
   '.html': 'text/html; charset=utf-8',

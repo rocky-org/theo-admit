@@ -1002,7 +1002,7 @@ function startRefresh() {
   $('refresh-fill').style.width = '2%';
   $('refresh-status').textContent = 'pornesc descărcarea…';
 
-  const source = new EventSource('/api/refresh?pages=70');
+  const source = new EventSource('/api/refresh?pages=75');
   const finish = () => {
     source.close();
     btn.disabled = false;
